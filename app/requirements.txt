@@ -1,0 +1,10 @@
+torch
+torchvision
+torchaudio
+transformers
+sentencepiece
+faiss-cpu
+sentence-transformers
+gradio
+openai
+elasticsearch

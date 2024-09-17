@@ -1,0 +1,35 @@
+services:
+  elasticsearch:
+    image: elasticsearch:7.10.1
+    environment:
+      - discovery.type=single-node
+      - xpack.security.enabled=false
+    ports:
+      - "9200:9200"
+    networks:
+      - rag_network
+
+  rag_qa_system:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    depends_on:
+      - elasticsearch
+    ports:
+      - "7860:7860"
+    volumes:
+      - ./app:/app
+    environment:
+      - OPENAI_API_KEY=${OPENAI_API_KEY}
+      - ES_HOST=http://elasticsearch:9200
+    command: tail -f /dev/null
+    deploy:
+      resources:
+        limits:
+          memory: 8g
+    networks:
+      - rag_network
+
+networks:
+  rag_network:
+    driver: bridge

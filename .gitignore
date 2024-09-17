@@ -1,0 +1,11 @@
+.env
+.DS_Store
+__pycache__/*
+.git/
+*.sh
+
+*.json
+*.terraform
+
+/data
+/draft
